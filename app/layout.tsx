@@ -67,6 +67,9 @@ export const metadata: Metadata = {
   title: "Aidan Nguyen",
   description:
     "Portfolio of Aidan Nguyen — designer and developer crafting cinematic, editorial digital experiences.",
+  icons: {
+    icon: "/cheng-xiaoshi-pointing.png",
+  },
 };
 
 export default function RootLayout({
