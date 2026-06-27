@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors — achromatic by design */
+  --color-paper-white: #ffffff;
+  --color-ink-black: #000000;
+  --color-carbon: #181818;
+  --color-ash: #6d6d6d;
+  --color-smoke: #9a9a9a;
+  --color-pewter: #808080;
+  --color-graphite: #636363;
+
+  /* Typography — Roobert (Inter substitute), Raleway, system-ui */
+  --font-roobert: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-raleway: var(--font-raleway), ui-sans-serif, system-ui, sans-serif;
+
+  /* Type scale */
+  --text-body: 16px;
+  --text-body--line-height: 1.39;
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.36;
+  --text-subheading: 30px;
+  --text-subheading--line-height: 1.25;
+  --text-heading-sm: 45px;
+  --text-heading-sm--line-height: 1.22;
+  --text-heading: 54px;
+  --text-heading--line-height: 1.21;
+  --text-heading-lg: 78px;
+  --text-heading-lg--line-height: 1.15;
+  --text-display: 94px;
+  --text-display--line-height: 1.1;
+  --text-hero: 225px;
+  --text-hero--line-height: 0.76;
+
+  /* Spacing */
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-28: 28px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-68: 68px;
+  --spacing-152: 152px;
+
+  /* Radius — sharp or fully pill, nothing in between */
+  --radius-pill: 75px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ken Burns — slow cinematic drift for still project images */
+@keyframes kenburns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.08) translate(-1.5%, -1%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+.kenburns {
+  animation: kenburns 20s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* Rotating headline — phrases slide up while crossfading */
+@keyframes phrase-enter {
+  from {
+    opacity: 0;
+    transform: translateY(1em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes phrase-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-1em);
+  }
+}
+.phrase-enter {
+  /* delay so the incoming phrase waits for the outgoing one to leave */
+  animation: phrase-enter 1.5s ease 1.3s both;
+}
+.phrase-exit {
+  animation: phrase-exit 1.5s ease forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .phrase-enter,
+  .phrase-exit {
+    animation: none;
+  }
+}
+
+/* Terminal block cursor blink */
+@keyframes terminal-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+.terminal-cursor {
+  animation: terminal-blink 1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kenburns {
+    animation: none;
+  }
+}
+
+/* Theme — page surface + text flip between modes (default: dark) */
+:root {
+  --page-bg: var(--color-ink-black);
+  --page-fg: var(--color-paper-white);
+  --cursor: var(--color-paper-white);
+}
+
+.light {
+  --page-bg: var(--color-paper-white);
+  --page-fg: var(--color-ink-black);
+  --cursor: #90d5ff;
+}
+
+/* Text selection — icy blue to match the liquid-glass field */
+::selection {
+  background: #dff1ff;
+  color: #79cdff;
+}
+::-moz-selection {
+  background: #dff1ff;
+  color: #79cdff;
+}
+
+/* Hide the native cursor only while the custom one is active (desktop, JS on) */
+html.cursor-none,
+html.cursor-none * {
+  cursor: none !important;
+}
+
+body {
+  background: var(--page-bg);
+  color: var(--page-fg);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  font-family: var(--font-roobert);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
