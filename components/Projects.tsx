@@ -28,7 +28,7 @@ const PROJECTS: Project[] = [
     year: "2025",
     tags: ["TypeScript", "Motion"],
     video: "/projects/three.mp4",
-    href: "https://github.com/Stunned1/portfolio",
+    href: "https://portfolio-aidans-projects-cf539d11.vercel.app",
   },
   {
     title: "Tsukora",
